@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>L'Intelligence Artificielle — INTERFACE Magazine BTS SIO</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap');
+
+/* ══ PRINT A4 ══ */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+    body { background: white !important; padding: 0 !important; }
+    .page { margin: 0 !important; box-shadow: none !important;
+            page-break-after: always; break-after: page; }
+}
+
+/* ══ VARIABLES ══ */
+:root {
+    --ink:    #0f172a;
+    --red:    #e11d48;
+    --paper:  #ffffff;
+    --warm:   #fdf2f4;
+    --fog:    #f8fafc;
+    --muted:  #64748b;
+    --rule:   #e2e8f0;
+    --ff-t:   'Playfair Display', Georgia, serif;
+    --ff-d:   'Oswald', Impact, sans-serif;
+    --ff-b:   'Roboto', Arial, sans-serif;
+    --gap:    26px;
+    --pad:    18mm;
+}
+
+/* ══ BASE ══ */
+*, *::before, *::after { box-sizing: border-box; }
+body { background: #111827; margin: 0; padding: 30px 0;
+       font-family: var(--ff-b); color: var(--ink); }
+
+/* ══ PAGE FRAME ══ */
+.page {
+    width: 210mm; min-height: 297mm; background: var(--paper);
+    margin: 0 auto 40px; padding: 15mm var(--pad) 24mm;
+    position: relative; overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0,0,0,.7);
+}
+
+/* ══ PARAGRAPHS ══ */
+p { font-size: .9rem; line-height: 1.7; margin: 0 0 12px;
+    text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+    widows: 3; orphans: 3; }
+
+/* ══ HEADINGS ══ */
+h1,h2,h3,h4,h5 { font-family: var(--ff-t); color: var(--ink); margin-top: 0; }
+h4 { font-family: var(--ff-d); font-size: .86rem; font-weight: 600;
+     letter-spacing: .5px; text-transform: uppercase;
+     padding-left: 10px; border-left: 3px solid var(--red);
+     margin: 16px 0 6px; break-after: avoid; }
+
+/* ══ DROP CAP ══ */
+.dropcap::first-letter {
+    font-family: var(--ff-t); font-size: 4.8em; font-weight: 900;
+    font-style: italic; line-height: .75;
+    float: left; margin: .04em .08em 0 0; color: var(--red);
+}
+
+/* ══ PULL QUOTE ══ */
+.exergue { border-left: 4px solid var(--red); background: var(--warm);
+           padding: 12px 18px; margin: 18px 0; break-inside: avoid; }
+.exergue p { font-family: var(--ff-t); font-size: 1rem; font-style: italic;
+             color: var(--ink); margin: 0; text-align: left;
+             hyphens: none; line-height: 1.5; }
+.exergue-span { column-span: all; border-top: 2px solid var(--red);
+                border-bottom: 2px solid var(--red); padding: 14px 10px;
+                margin: 18px 0; break-inside: avoid; }
+.exergue-span p { font-family: var(--ff-t); font-size: 1.1rem; font-style: italic;
+                  color: var(--ink); margin: 0; text-align: center; hyphens: none; }
+
+/* ══ RUBRIQUE TAG ══ */
+.rubrique-wrap { margin-bottom: 6px; }
+.rubrique-tag { font-family: var(--ff-d); background: var(--ink); color: #fff;
+                font-size: .66rem; font-weight: 600; letter-spacing: 3px;
+                text-transform: uppercase; padding: 5px 14px;
+                display: inline-block; position: relative; }
+.rubrique-tag::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+                       height: 3px; background: var(--red); }
+
+/* ══ ARTICLE TITLE ══ */
+.article-title { font-family: var(--ff-t); font-size: 1.9rem; font-weight: 900;
+                 line-height: 1.05; margin: 8px 0 0; }
+
+/* ══ AUTHOR BOX ══ */
+.author-box { display: flex; align-items: center; gap: 10px;
+              margin: 10px 0 18px; padding: 8px 0;
+              border-top: 2px solid var(--red); }
+.author-avatar { width: 28px; height: 28px; border-radius: 50%;
+                 background: var(--red); color: #fff; font-family: var(--ff-d);
+                 font-size: .6rem; font-weight: 700; display: flex;
+                 align-items: center; justify-content: center; flex-shrink: 0; }
+.author-name { font-family: var(--ff-d); font-size: .77rem; font-weight: 600;
+               color: var(--ink); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ══ COLUMNS ══ */
+.cols { column-count: 2; column-gap: var(--gap); column-rule: 1px solid var(--rule); }
+.span-all { column-span: all; }
+
+/* ══ FIGURES ══ */
+figure { margin: 16px 0; break-inside: avoid; }
+img { width: 100%; height: auto; display: block; }
+figcaption { font-size: .73rem; font-style: italic; color: var(--muted);
+             margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--rule); }
+
+/* ══ FOLIO ══ */
+.folio { position: absolute; bottom: 12mm; display: flex; align-items: center;
+         gap: 8px; font-family: var(--ff-d); font-size: .62rem;
+         letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+.folio-l { left: var(--pad); flex-direction: row-reverse; }
+.folio-r { right: var(--pad); }
+.folio-n { font-size: 1.2rem; font-weight: 700; color: var(--red); line-height: 1; }
+
+/* ══ UTILITY ══ */
+.no-break { break-inside: avoid; }
+strong { color: var(--ink); }
+
+/* ═══════════ COVER ═══════════ */
+.cover-masthead { display: flex; justify-content: space-between; align-items: flex-end;
+                  border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 16px; }
+.mag-logo { font-family: var(--ff-d); font-size: 2rem; font-weight: 700;
+            color: var(--ink); letter-spacing: -1px; line-height: 1; }
+.mag-logo em { color: var(--red); font-style: normal; }
+.mag-meta { text-align: right; font-family: var(--ff-d); font-size: .62rem;
+            letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+.cover-hero { background: var(--ink); padding: 38px 30px; margin-bottom: 18px;
+              position: relative; overflow: hidden; }
+.cover-hero::before { content: 'IA'; position: absolute; right: -15px; top: -30px;
+                      font-family: var(--ff-d); font-size: 12rem; font-weight: 700;
+                      color: rgba(255,255,255,.04); line-height: 1; pointer-events: none; }
+.cover-kicker { font-family: var(--ff-d); font-size: .62rem; letter-spacing: 5px;
+                color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
+.cover-h1 { font-family: var(--ff-t); font-size: 3.1rem; font-weight: 900;
+            color: #fff; line-height: .97; margin: 0 0 14px; }
+.cover-sub { font-family: var(--ff-t); font-size: 1.1rem; font-style: italic;
+             color: #94a3b8; margin: 0; }
+.cover-bar { width: 50px; height: 4px; background: var(--red); margin: 16px 0; }
+.cover-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; }
+
+.edito { background: var(--ink); padding: 20px; break-inside: avoid; }
+.edito h2 { font-family: var(--ff-d); font-size: .68rem; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+.edito p { color: #cbd5e1; font-size: .82rem; text-align: left; }
+.edito-team-hd { font-family: var(--ff-d); font-size: .6rem; letter-spacing: 2px;
+                 text-transform: uppercase; color: var(--red);
+                 margin: 14px 0 6px; padding-top: 10px;
+                 border-top: 1px solid rgba(225,29,72,.25); }
+.team { list-style: none; padding: 0; margin: 0; }
+.team li { color: #e2e8f0; font-size: .78rem; padding: 2px 0; }
+.team .role { font-family: var(--ff-d); color: var(--red); font-size: .6rem;
+              letter-spacing: 1px; text-transform: uppercase; margin-right: 5px; }
+
+.sommaire { border: 2px solid var(--ink); break-inside: avoid; }
+.sommaire h2 { font-family: var(--ff-d); background: var(--ink); color: #fff;
+               font-size: .68rem; letter-spacing: 3px; text-transform: uppercase;
+               margin: 0; padding: 10px 14px; }
+.som { list-style: none; padding: 0; margin: 0; }
+.som li { display: flex; justify-content: space-between; align-items: flex-start;
+          padding: 7px 14px; border-bottom: 1px solid #f1f5f9; gap: 8px; }
+.som li:last-child { border-bottom: none; }
+.som-rub { font-family: var(--ff-d); color: var(--red); font-size: .58rem;
+           letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.som-art { font-size: .76rem; color: var(--ink); }
+.som-pg { font-family: var(--ff-d); font-weight: 700; color: var(--red);
+          font-size: .92rem; flex-shrink: 0; }
+
+/* ═══════════ ADS ═══════════ */
+.ad { column-span: all; padding: 24px 26px; margin: 22px 0 0;
+      position: relative; overflow: hidden; break-inside: avoid; text-align: center; }
+.ad::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+
+/* — NVIDIA AD — */
+.ad.nvidia { background: #1a1a1a; }
+.ad.nvidia::before { background: #76b900; }
+.ad.nvidia .ad-kicker { color: #76b900; }
+.ad.nvidia h2 { color: #fff; }
+.ad.nvidia p { color: #94a3b8; }
+.ad.nvidia .ad-hl { color: #76b900 !important; }
+
+/* — GITHUB COPILOT AD — */
+.ad.copilot { background: #0d1117; }
+.ad.copilot::before { background: linear-gradient(90deg,#238636,#2ea043,#238636); }
+.ad.copilot .ad-kicker { color: #2ea043; }
+.ad.copilot h2 { color: #fff; }
+.ad.copilot p { color: #8b949e; }
+.ad.copilot .ad-hl { color: #2ea043 !important; }
+
+.ad-kicker { font-family: var(--ff-d); font-size: .56rem; letter-spacing: 4px;
+             text-transform: uppercase; margin-bottom: 5px; }
+.ad h2 { font-family: var(--ff-d); text-transform: uppercase;
+         font-size: 1.4rem; margin: 0 0 10px; letter-spacing: 2px; }
+.ad p { font-size: .83rem; margin: 0 0 6px; text-align: center; }
+.ad-hl { font-family: var(--ff-d); font-size: 1.05rem; font-weight: 700;
+         letter-spacing: 1px; margin-top: 10px !important; }
+.ad-url { font-family: var(--ff-d); font-size: .7rem; letter-spacing: 2px;
+          color: #4b5563 !important; margin-top: 8px !important; text-transform: lowercase; }
+
+/* ═══════════ INTERVIEW ═══════════ */
+.itw-intro { column-span: all; border-left: 4px solid var(--ink);
+             background: var(--fog); padding: 12px 18px; margin-bottom: 20px;
+             font-size: .86rem; color: var(--muted); font-style: italic;
+             break-inside: avoid; }
+.itw-intro strong { color: var(--ink); font-style: normal; }
+.itw-intro p { font-size: .86rem; color: var(--muted); font-style: italic;
+               text-align: left; margin: 0; }
+
+.itw-thread { column-span: all; border-left: 2px solid var(--red);
+              padding-left: 22px; margin-left: 6px; }
+.itw-pair { break-inside: avoid; margin-bottom: 4px; }
+
+.itw-q { display: block; margin-top: 18px; font-family: var(--ff-d); font-size: .68rem;
+         color: var(--red); letter-spacing: 1px; text-transform: uppercase;
+         font-weight: 700; break-after: avoid; }
+.itw-q::before { content: 'Q'; display: inline-flex; align-items: center;
+                 justify-content: center; background: var(--red); color: #fff;
+                 width: 17px; height: 17px; border-radius: 50%;
+                 font-size: .58rem; margin-right: 6px; font-weight: 900;
+                 vertical-align: middle; }
+.itw-qt { font-family: var(--ff-t); font-style: italic; font-size: .9rem;
+          color: var(--ink); font-weight: 400; display: block;
+          margin: 3px 0 0 23px; text-transform: none; letter-spacing: 0;
+          hyphens: auto; line-height: 1.5; }
+.itw-a { display: block; margin: 7px 0 0 23px; padding: 11px 14px;
+         background: var(--fog); border-top: 2px solid var(--ink); }
+.itw-a-lbl { font-family: var(--ff-d); font-size: .56rem; letter-spacing: 2px;
+             color: var(--ink); text-transform: uppercase; font-weight: 700;
+             display: block; margin-bottom: 4px; }
+.itw-a p { font-size: .875rem; margin: 0; text-align: left; color: #374151;
+           hyphens: auto; }
+
+/* ══ INTERVIEW SUITE HEADER ══ */
+.itw-suite { font-family: var(--ff-d); font-size: .75rem; letter-spacing: 2px;
+             color: var(--muted); text-transform: uppercase;
+             border-bottom: 1px solid var(--rule); padding-bottom: 8px;
+             margin-bottom: 16px; }
+.itw-suite span { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════
+     P.1 — COUVERTURE
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="cover-masthead">
+        <div class="mag-logo">INTERFACE<em>.</em>
+            <span style="font-family:var(--ff-d);font-size:.75rem;color:var(--muted);letter-spacing:2px;font-weight:300;"> LE MAGAZINE BTS SIO</span>
+        </div>
+        <div class="mag-meta">Numéro 1 — Édition 2024<br>L'IA en 8 dossiers</div>
+    </div>
+
+    <div class="cover-hero">
+        <div class="cover-kicker">Dossier Spécial &nbsp;·&nbsp; 8 articles</div>
+        <h1 class="cover-h1">L'Intelligence<br>Artificielle</h1>
+        <div class="cover-bar"></div>
+        <p class="cover-sub">Nouvelle Frontière du réel ?</p>
+    </div>
+
+    <div class="cover-grid">
+        <div class="edito">
+            <h2>Édito</h2>
+            <p>Le monde bouge, et avec lui, notre regard sur la technologie et la société. L'IA générative bouleverse la société en 2024. C'est un sujet incontournable qui transforme le monde du travail et la création artistique.</p>
+            <p>En tant qu'étudiants en informatique (BTS SIO), comprendre ses enjeux techniques et éthiques est crucial pour nos futurs métiers. Dans quelle mesure l'intelligence artificielle redéfinit-elle notre rapport à la vérité, à la création et à notre avenir professionnel ?</p>
+            <div class="edito-team-hd">L'Équipe Rédactionnelle</div>
+            <ul class="team">
+                <li><span class="role">Rédacteur</span> Moncef MALLEM</li>
+                <li><span class="role">Rédacteur</span> Lucas MARTINS</li>
+                <li><span class="role">Rédacteur</span> Mohammad NDOYE</li>
+                <li><span class="role">Rédacteur</span> Jeniffan JOHN ARULTHASAN</li>
+            </ul>
+        </div>
+
+        <div class="sommaire">
+            <h2>Sommaire</h2>
+            <ul class="som">
+                <li>
+                    <div><span class="som-rub">Tech &amp; Innovation</span><span class="som-art">ChatGPT, autopsie d'une illusion mathématique</span></div>
+                    <span class="som-pg">2</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Tech &amp; Innovation</span><span class="som-art">L'ordinateur quantique va-t-il doper l'IA ?</span></div>
+                    <span class="som-pg">3</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Société &amp; Éthique</span><span class="som-art">Deepfakes : la fin de la vérité en vidéo ?</span></div>
+                    <span class="som-pg">4</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Société &amp; Éthique</span><span class="som-art">Biais algorithmiques : quand la machine hérite de nos préjugés</span></div>
+                    <span class="som-pg">5</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Monde du Travail</span><span class="som-art">Interview : L'IA me remplacera ? (2 pages)</span></div>
+                    <span class="som-pg">6–7</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Monde du Travail</span><span class="som-art">L'IA : menace ou opportunité pour nos futurs emplois ?</span></div>
+                    <span class="som-pg">8</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Culture &amp; Loisirs</span><span class="som-art">Générateurs d'images : quand le clavier remplace le pinceau</span></div>
+                    <span class="som-pg">9</span>
+                </li>
+                <li>
+                    <div><span class="som-rub">Culture &amp; Loisirs</span><span class="som-art">PNJ intelligents : quand le jeu vidéo prend vie</span></div>
+                    <span class="som-pg">10</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════
+     P.2 — CHATGPT (Moncef MALLEM)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Tech et Innovation</span></div>
+    <h2 class="article-title">ChatGPT, comment ça marche ?<br>Autopsie d'une illusion mathématique</h2>
+    <div class="author-box">
+        <div class="author-avatar">MM</div>
+        <span class="author-name">Par Moncef MALLEM</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">Il rédige nos mails, corrige nos lignes de code en Python et répond à nos questions complexes en quelques secondes. Depuis son lancement, ChatGPT a bouleversé notre quotidien, en particulier pour nous, étudiants en informatique. Mais derrière la magie de son interface épurée, il n'y a ni conscience, ni véritable réflexion. Seulement des mathématiques appliquées à une échelle vertigineuse. Plongée dans les entrailles d'un algorithme bluffant.</p>
+
+        <h4>Un correcteur orthographique sous stéroïdes</h4>
+        <p>Pour démystifier cette intelligence artificielle, il faut d'abord comprendre sa nature profonde. ChatGPT est ce que l'on appelle un Large Language Model (LLM), ou Grand Modèle de Langage en français. Pour vulgariser, on pourrait le comparer au correcteur prédictif de notre smartphone, mais avec une puissance décuplée. Quand vous tapez « Je vais au... », votre téléphone vous propose « cinéma » ou « travail » car il a appris vos habitudes d'écriture. L'intelligence artificielle d'OpenAI fait exactement la même chose, mais à l'échelle des connaissances de l'humanité.</p>
+
+        <p>Elle a assimilé une base de données colossale : Wikipédia dans toutes les langues, des millions de livres, des articles de presse, et des forums entiers de développeurs comme StackOverflow ou GitHub. Lorsqu'on lui pose une question, elle ne réfléchit pas au sens philosophique du terme. Elle découpe le texte en petits morceaux appelés <em>tokens</em> et calcule une probabilité mathématique complexe : quel est le mot qui a le plus de chances d'arriver ensuite ? C'est ce que les chercheurs nomment un <em>perroquet stochastique</em> : une machine qui répète et assemble des motifs de manière purement statistique, sans jamais comprendre ce qu'elle énonce.</p>
+
+        <figure>
+            <img src="img-chatgpt.jpg" alt="Interface ChatGPT">
+            <figcaption>Une conversation avec ChatGPT — l'interface cache un moteur statistique vertigineux.</figcaption>
+        </figure>
+
+        <h4>La révolution Transformer</h4>
+        <p>Si le texte prédictif existe depuis des dizaines d'années, pourquoi ChatGPT est-il soudainement si performant ? Le secret réside dans une architecture algorithmique révolutionnaire appelée <em>Transformer</em>, inventée par des chercheurs de Google en 2017. Avant cette invention, les algorithmes lisaient les phrases de manière séquentielle, mot après mot. Le problème, c'est qu'ils finissaient par perdre le sens global d'un long texte avant même d'arriver à la fin du paragraphe.</p>
+
+        <p>L'architecture Transformer utilise un mécanisme novateur appelé l'<em>attention</em>, qui permet à l'IA d'analyser tous les mots de votre question d'un seul coup, en cartographiant quels termes sont liés entre eux. C'est cette performance qui lui donne sa capacité à maintenir le contexte et à simuler une conversation humaine fluide.</p>
+
+        <div class="exergue">
+            <p>« L'informaticien de demain ne sera pas remplacé par la machine. Il deviendra l'architecte et le vérificateur indispensable des hallucinations de l'algorithme. »</p>
+        </div>
+
+        <h4>Le danger caché : l'hallucination</h4>
+        <p>Cette conception mathématique engendre le plus grand point faible de l'IA générative : l'<em>hallucination</em>. Puisque l'objectif absolu de l'algorithme est de produire une suite de mots plausible et syntaxiquement parfaite, la vérité factuelle n'est pas du tout sa priorité. Pour satisfaire la probabilité mathématique de la phrase, la machine peut inventer une fausse librairie logicielle, de fausses sources ou un faux fait historique avec un aplomb redoutable.</p>
+
+        <h4>L'impact sur notre futur métier</h4>
+        <p>Dans notre futur métier, que l'on soit en développement ou en réseaux, ce défaut est critique. Un code généré par l'IA peut sembler parfait à première vue, tout en introduisant une faille de sécurité invisible qui fera planter tout un système. L'informaticien de demain ne sera donc pas remplacé par la machine. Au contraire, son rôle va évoluer. L'IA propose, mais seul l'humain dispose du discernement nécessaire pour valider.</p>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">2</span> Interface Magazine</div>
+    <div class="folio folio-r">Tech &amp; Innovation</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.3 — ORDINATEUR QUANTIQUE (Moncef MALLEM)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Tech et Innovation</span></div>
+    <h2 class="article-title">Le futur : l'ordinateur quantique va-t-il doper l'IA ?</h2>
+    <div class="author-box">
+        <div class="author-avatar">MM</div>
+        <span class="author-name">Par Moncef MALLEM</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">L'intelligence artificielle progresse vite, mais elle demande toujours plus de puissance de calcul. L'ordinateur quantique pourrait accélérer certains traitements complexes. Mais cette promesse cache aussi un vrai défi pour la cybersécurité.</p>
+
+        <h4>Un ordinateur qui ne travaille pas seulement avec des 0 et des 1</h4>
+        <p>Un ordinateur classique fonctionne avec des bits. Un bit vaut soit 0, soit 1. C'est la base du système binaire que l'on utilise en informatique. L'ordinateur quantique, lui, utilise des <em>qubits</em>. Pour simplifier, un qubit peut représenter plusieurs possibilités en même temps. On peut l'imaginer comme une pièce lancée en l'air : tant qu'elle n'est pas retombée, elle n'est pas seulement pile ou face. Elle est dans un état intermédiaire. C'est cette logique, appelée <em>superposition</em>, qui rend le quantique différent.</p>
+
+        <h4>Pourquoi cela peut aider l'intelligence artificielle</h4>
+        <p>Aujourd'hui, entraîner une IA demande énormément de calculs. Les modèles doivent analyser des quantités gigantesques de données, comparer des milliards de paramètres et répéter les mêmes opérations pendant des jours, voire des semaines. Le quantique pourrait aider l'IA dans des domaines où il faut tester beaucoup de possibilités : la recherche médicale, la création de nouveaux matériaux, l'optimisation de trajets ou la météo. Au lieu d'essayer les solutions une par une, la machine pourrait explorer plusieurs pistes simultanément.</p>
+
+        <div class="exergue">
+            <p>« Un ordinateur quantique assez puissant pourrait casser certains systèmes de chiffrement utilisés aujourd'hui, comme RSA. »</p>
+        </div>
+
+        <figure>
+            <img src="img-quantique.jpg" alt="Ordinateur Quantique">
+            <figcaption>Représentation d'un ordinateur quantique — ses qubits fonctionnent à des températures proches du zéro absolu.</figcaption>
+        </figure>
+
+        <h4>La grande inquiétude : la sécurité des données</h4>
+        <p>Le danger le plus connu concerne la cybersécurité. Un ordinateur quantique assez puissant pourrait casser certains systèmes de chiffrement utilisés aujourd'hui, comme RSA. Cela poserait un problème pour les mots de passe, les paiements en ligne, les messages privés et les données des entreprises. C'est pour cette raison que les chercheurs travaillent déjà sur la <em>cryptographie post-quantique</em>.</p>
+
+        <!-- ═ PUBLICITÉ NVIDIA ═ -->
+        <div class="ad nvidia no-break">
+            <div class="ad-kicker">Publicité — Matériel IA &amp; Gaming</div>
+            <h2>NVIDIA — The Engine of AI</h2>
+            <p>Les GPU qui alimentent les modèles qui définissent demain.</p>
+            <p>Découvrez les cartes <strong style="color:#76b900;">GeForce RTX 50 Series</strong> — conçues pour l'IA, optimisées pour la création et le gaming à haute performance.</p>
+            <p class="ad-hl">AI IS THE NEW ELECTRICITY.</p>
+            <p class="ad-url">nvidia.com/geforce</p>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">3</span> Interface Magazine</div>
+    <div class="folio folio-r">Tech &amp; Innovation</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.4 — DEEPFAKES (Lucas MARTINS)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Société et Éthique</span></div>
+    <h2 class="article-title">Deepfakes : la fin de la vérité en vidéo ?</h2>
+    <div class="author-box">
+        <div class="author-avatar">LM</div>
+        <span class="author-name">Par Lucas MARTINS</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">On a tous vu passer cette fameuse photo du Pape François, se promenant tranquillement avec une énorme doudoune blanche de marque. On a aussi vu des vidéos de présidents chantant des morceaux de rap sur TikTok, ou des acteurs célèbres incrustés dans des films dans lesquels ils n'ont jamais joué. Sur le moment, on sourit, on partage le lien et on se dit que la prouesse technique est amusante. Mais quand on s'arrête pour y réfléchir, la réalité derrière ces images a de quoi donner des sueurs froides. Ces trucages ultra-réalistes, regroupés sous le terme de <em>Deepfakes</em>, ne sont plus réservés aux studios d'Hollywood.</p>
+
+        <h4>La technique derrière l'illusion visuelle</h4>
+        <p>Le terme <em>Deepfake</em> provient de la fusion entre le « Deep Learning » (apprentissage profond) et le mot « Fake » (faux). Dans la grande majorité des cas, l'architecture informatique repose sur des <em>GANs</em> — Réseaux Antagonistes Génératifs.</p>
+        <p>Imaginez deux intelligences artificielles qui s'affrontent en permanence. Le premier algorithme, le « générateur », s'entraîne en avalant des milliers de photos d'une personne cible. Le second, le « discriminateur », joue le rôle du policier : il tente de deviner si l'image produite est authentique ou artificielle. Après des millions de corrections, l'algorithme créateur finit par produire un visage de synthèse capable de tromper le système de vérification.</p>
+
+        <figure>
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath/Deepfake.jpg&width=800" alt="Exemple de Deepfake">
+            <figcaption>Exemple de deepfake — la frontière entre réel et artificiel devient imperceptible.</figcaption>
+        </figure>
+
+        <h4>Le Vishing et l'arnaque de la voix clonée</h4>
+        <p>Le premier secteur qui s'en frotte les mains, c'est évidemment la cybercriminalité. Quelques secondes d'une « story » Instagram suffisent à une IA pour modéliser et cloner le timbre exact de votre voix. Ensuite, le pirate appelle vos parents au beau milieu de la nuit. L'algorithme reproduit votre voix en temps réel pour expliquer que vous venez d'avoir un grave accident.</p>
+        <p>Dans le milieu professionnel, on voit exploser ces attaques ciblées, que l'on appelle le <em>Vishing</em> (Voice Phishing). Récemment, un employé travaillant dans la finance à Hong Kong a transféré 25 millions de dollars sur les comptes de cybercriminels — convié à une visioconférence où tous les participants à l'écran étaient des Deepfakes animés en temps réel.</p>
+
+        <h4>Le poison de la démocratie</h4>
+        <p>C'est sur le plan politique et démocratique que la menace est la plus explosive. Si le public sait que la technologie permet de tout truquer, alors n'importe quelle personnalité publique prise en flagrant délit dans une vraie vidéo compromettante pourra s'en sortir avec une excuse toute trouvée.</p>
+
+        <div class="exergue">
+            <p>« Le doute s'installe partout. Et si tout peut potentiellement être faux, la vérité perd sa valeur. »</p>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">4</span> Interface Magazine</div>
+    <div class="folio folio-r">Société &amp; Éthique</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.5 — BIAIS ALGORITHMIQUES (Lucas MARTINS)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Société et Éthique</span></div>
+    <h2 class="article-title">Biais algorithmiques et racisme : quand la machine hérite de nos préjugés</h2>
+    <div class="author-box">
+        <div class="author-avatar">LM</div>
+        <span class="author-name">Par Lucas MARTINS</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">On entend souvent dire que les mathématiques ne mentent pas. Que les ordinateurs, contrairement aux êtres humains, n'ont pas d'humeur, pas de préférences, et surtout, pas de préjugés. Mais en préparant ce numéro, je me suis plongé dans les coulisses de l'intelligence artificielle et j'ai réalisé à quel point cette idée est fausse.</p>
+
+        <div class="exergue">
+            <p>« La machine n'est absolument pas neutre. Pire, elle agit comme un miroir grossissant de nos propres défauts. »</p>
+        </div>
+
+        <h4>L'illusion de la donnée « propre »</h4>
+        <p>Un algorithme d'apprentissage automatique (Machine Learning), c'est juste un élève très appliqué qui révise avec les manuels qu'on lui donne. On ne lui programme pas de règles morales, on lui fournit des données historiques pour qu'il apprenne à reproduire des schémas de réussite. Le souci, c'est que notre histoire sociale n'est pas toujours belle à voir.</p>
+        <p>Prenons l'exemple du recrutement. Si les anciens recruteurs ont, par préjugé conscient ou inconscient, systématiquement écarté les candidats ayant des noms à consonance étrangère, l'IA va repérer cette constance. Elle ne va pas se dire « c'est injuste ». Elle va en déduire une règle mathématique froide et implacable. C'est l'effet « boîte noire » : la discrimination opère dans le silence total des serveurs, cachée sous une fausse objectivité scientifique.</p>
+
+        <figure>
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath/Face_detection.jpg&width=800" alt="Détection faciale par IA">
+            <figcaption>La détection faciale automatisée — précise sur certains profils, défaillante sur d'autres.</figcaption>
+        </figure>
+
+        <h4>Quand l'objectif de la caméra refuse de vous voir</h4>
+        <p>Le cas le plus choquant est celui de la reconnaissance faciale. De nombreuses enquêtes universitaires, notamment celles de la chercheuse Joy Buolamwini au MIT, ont prouvé que ces systèmes étaient désastreux lorsqu'ils devaient analyser des peaux noires ou métissées. Pourquoi ? Les bases de données d'entraînement, souvent constituées par des ingénieurs hommes et blancs dans la Silicon Valley, étaient composées en grande majorité de visages qui leur ressemblaient. Aux États-Unis, on compte déjà plusieurs affaires de fausses arrestations où des pères de famille afro-américains ont été jetés en cellule simplement parce qu'un algorithme mal entraîné les a confondus sur une caméra de surveillance floue.</p>
+
+        <!-- ═ PUBLICITÉ GITHUB COPILOT ═ -->
+        <div class="ad copilot no-break">
+            <div class="ad-kicker">Publicité — Outils Développeur IA</div>
+            <h2>GitHub Copilot</h2>
+            <p>Your AI pair programmer.</p>
+            <p>Écris du code plus vite avec l'IA directement dans ton éditeur. Disponible sur <strong style="color:#e2e8f0;">VS Code</strong>, <strong style="color:#e2e8f0;">JetBrains</strong> et <strong style="color:#e2e8f0;">Neovim</strong>.</p>
+            <p>Idéal pour les étudiants BTS SIO — Gratuit avec <strong style="color:#e2e8f0;">GitHub Education</strong>.</p>
+            <p class="ad-hl">55% plus productif. Mesuré sur nos utilisateurs.</p>
+            <p class="ad-url">github.com/features/copilot</p>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">5</span> Interface Magazine</div>
+    <div class="folio folio-r">Société &amp; Éthique</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.6 — INTERVIEW 1/2 (Mohammad NDOYE)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Monde du Travail</span></div>
+    <h2 class="article-title">Interview : L'IA me remplacera ?</h2>
+    <div class="author-box">
+        <div class="author-avatar">MN</div>
+        <span class="author-name">Par Mohammad NDOYE</span>
+    </div>
+
+    <div class="itw-intro" style="display:flex;gap:14px;align-items:flex-start;">
+        <img src="img-interview.jpg" alt="Directeur Cybersécurité — Bolloré" style="width:74px;height:90px;object-fit:cover;object-position:center top;border-radius:3px;border:2px solid var(--red);flex-shrink:0;">
+        <p><strong>Présentation de l'invité :</strong> Pour comprendre l'impact réel de l'Intelligence Artificielle sur nos futurs métiers, j'ai décidé de me tourner vers un expert de terrain. J'ai interviewé mon père, qui occupe le poste de <strong>Directeur de la Cybersécurité (CISO)</strong> au sein du grand groupe international <strong>Bolloré</strong>. Son quotidien consiste à protéger les serveurs, les données sensibles et les collaborateurs de l'entreprise contre des pirates informatiques de plus en plus ingénieux et désormais assistés par l'IA.</p>
+    </div>
+
+    <div class="itw-thread">
+        <div class="itw-pair">
+            <span class="itw-q">Mohammad</span>
+            <span class="itw-qt">Constatez-vous déjà des cyberattaques générées ou améliorées par l'IA (phishing, malware) ?</span>
+            <span class="itw-a">
+                <span class="itw-a-lbl">Le Directeur Cybersécurité — Bolloré</span>
+                <p>Oui, c'est devenu une réalité quotidienne depuis un peu plus d'un an. Ce qui a changé le plus vite, c'est la qualité des attaques par e-mail. Aujourd'hui, avec l'IA générative, les pirates écrivent des e-mails parfaits, dans un français impeccable avec un ton professionnel très convaincant. Les hackers utilisent l'IA pour analyser automatiquement les réseaux sociaux d'un employé, comprendre ses missions et lui envoyer un message sur mesure. C'est ce que l'on appelle du <em>spear phishing</em> — un hameçonnage ciblé et personnalisé.</p>
+            </span>
+        </div>
+
+        <div class="itw-pair">
+            <span class="itw-q">Mohammad</span>
+            <span class="itw-qt">Utilisez-vous l'IA pour défendre votre entreprise et détecter les intrusions plus vite ?</span>
+            <span class="itw-a">
+                <span class="itw-a-lbl">Le Directeur Cybersécurité — Bolloré</span>
+                <p>Absolument, c'est même devenu indispensable. Dans un grand groupe comme Bolloré, nos infrastructures génèrent des millions de lignes de journaux d'événements (les logs) chaque jour. Aucun humain ne peut surveiller un tel volume de données en temps réel. Nous utilisons donc le Machine Learning pour analyser le comportement normal de nos réseaux. Si un ordinateur se met soudainement à télécharger des milliers de fichiers confidentiels à trois heures du matin depuis une adresse IP inhabituelle, l'IA détecte cette anomalie en une fraction de seconde et déclenche une alerte automatique.</p>
+            </span>
+        </div>
+
+        <div class="itw-pair">
+            <span class="itw-q">Mohammad</span>
+            <span class="itw-qt">L'humain reste-t-il le maillon faible face à des IA capables d'imiter parfaitement des voix ou des e-mails ?</span>
+            <span class="itw-a">
+                <span class="itw-a-lbl">Le Directeur Cybersécurité — Bolloré</span>
+                <p>Malheureusement oui, l'humain reste souvent la cible privilégiée des attaquants car l'ingénierie sociale s'est perfectionnée. La technologie du Deepfake change la donne. Le clonage de voix est une menace très concrète. Sous le coup du stress, en entendant la voix exacte de son supérieur hiérarchique pour une demande de virement urgent, l'employé peut tomber dans le piège. Notre meilleure arme reste la sensibilisation et l'esprit critique de nos équipes — former les collaborateurs à vérifier systématiquement par un second canal.</p>
+            </span>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">6</span> Interface Magazine</div>
+    <div class="folio folio-r">Monde du Travail — Interview (1/2)</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.7 — INTERVIEW 2/2 (Mohammad NDOYE)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Monde du Travail</span></div>
+    <div class="itw-suite">Suite de l'interview — <span>Mohammad NDOYE</span> &nbsp;·&nbsp; Directeur Cybersécurité, Bolloré</div>
+
+    <div class="exergue-span">
+        <p>« L'analyste qui n'utilise pas l'IA se fera remplacer par celui qui sait la piloter. »</p>
+    </div>
+
+    <div class="itw-thread">
+        <div class="itw-pair">
+            <span class="itw-q">Mohammad</span>
+            <span class="itw-qt">Pensez-vous que l'IA remplacera un jour les analystes en cybersécurité ?</span>
+            <span class="itw-a">
+                <span class="itw-a-lbl">Le Directeur Cybersécurité — Bolloré</span>
+                <p>Non, je ne pense pas qu'elle remplacera les professionnels qualifiés, mais elle va profondément transformer leur rôle. Actuellement, l'IA joue le rôle d'un assistant ultra-rapide. Elle trie les milliers de fausses alertes quotidiennes, automatise les tâches répétitives et rédige les premiers rapports d'incidents. Cependant, face à une cyberattaque totalement inédite ou très ciblée, la machine montre ses limites. Elle ne sait pas improviser, elle ne comprend pas le contexte politique ou stratégique d'une organisation. Le marché n'éliminera pas les analystes, mais l'analyste qui n'utilise pas l'IA se fera remplacer par celui qui sait la piloter.</p>
+            </span>
+        </div>
+
+        <div class="itw-pair">
+            <span class="itw-q">Mohammad</span>
+            <span class="itw-qt">Quels conseils donneriez-vous à des étudiants en BTS SIO pour se préparer aux menaces de demain ?</span>
+            <span class="itw-a">
+                <span class="itw-a-lbl">Le Directeur Cybersécurité — Bolloré</span>
+                <p>Mon premier conseil pour des étudiants en BTS SIO est de ne pas se focaliser uniquement sur l'exécution technique pure, comme écrire des lignes de code simples, car les IA savent déjà le faire très bien. Apprenez à intégrer la sécurité dès la conception d'un projet informatique — ce qu'on appelle le <em>Security by Design</em>. Dans notre domaine, on applique de plus en plus le modèle du « Zero Trust » : on ne fait confiance à personne a priori, on vérifie tout, on cloisonne les accès. Gardez cette habitude de vérifier les sources et de questionner ce que vous voyez. Face à l'IA, l'esprit critique sera votre meilleur bouclier tout au long de votre carrière.</p>
+            </span>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">7</span> Interface Magazine</div>
+    <div class="folio folio-r">Monde du Travail — Interview (2/2)</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.8 — IA ET EMPLOIS (Mohammad NDOYE)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Monde du Travail</span></div>
+    <h2 class="article-title">L'intelligence artificielle : menace ou opportunité pour nos futurs emplois ?</h2>
+    <div class="author-box">
+        <div class="author-avatar">MN</div>
+        <span class="author-name">Par Mohammad NDOYE</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">Depuis l'arrivée de l'intelligence artificielle générative dans le domaine public, une question revient en boucle dans tous les débats : la machine va-t-elle finir par nous remplacer ? Pour nous, étudiants en informatique, cette interrogation n'est pas seulement théorique, elle concerne directement notre avenir professionnel. L'IA ne semble pas encore prête à vider les bureaux, mais elle s'apprête à transformer profondément la manière dont nous travaillons.</p>
+
+        <h4>Une révolution comparable aux précédentes ?</h4>
+        <p>L'histoire nous montre que chaque grande avancée technologique a provoqué les mêmes craintes. Lors de la première révolution industrielle, les ouvriers craignaient que les machines à vapeur ne détruisent l'artisanat. Plus tard, l'arrivée de l'informatique dans les années 80 devait signer la fin du travail de bureau. Pourtant, à chaque fois, de nouveaux métiers ont été créés pour remplacer ceux qui disparaissaient. Le défi aujourd'hui est que l'IA ne s'attaque pas seulement aux tâches physiques ou répétitives, mais aussi aux fonctions intellectuelles et créatives.</p>
+
+        <p>Dans le secteur informatique, l'impact est déjà visible. Des outils capables de générer du code source ou de détecter des erreurs de programmation en quelques secondes modifient notre productivité. Cependant, il faut bien comprendre que l'IA ne possède pas de conscience professionnelle. Un développeur ne se limite pas à écrire des lignes de code ; il doit concevoir des architectures, assurer la sécurité des systèmes et s'adapter aux changements de stratégie d'une entreprise.</p>
+
+        <figure>
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath/Pepper_humanoid_robot_-_Japan_-_August_2014_.jpg&width=800" alt="Robot Pepper — IA et emplois">
+            <figcaption>Le robot Pepper — symbole de l'IA qui assiste l'humain sans le remplacer totalement.</figcaption>
+        </figure>
+
+        <h4>L'automatisation face à l'augmentation</h4>
+        <p>Plutôt que de parler de remplacement, les experts préfèrent désormais le terme d'<em>augmentation</em>. L'idée est que l'IA devient un assistant, un « copilote » qui gère les tâches les plus chronophages. En déléguant ces tâches à une machine, le professionnel peut se concentrer sur la résolution de problèmes complexes et sur l'innovation. Demain, il ne suffira plus de maîtriser un langage de programmation ; il faudra savoir piloter des algorithmes et vérifier leurs résultats.</p>
+
+        <h4>Les limites éthiques et la responsabilité humaine</h4>
+        <p>Un aspect fondamental qui protège l'emploi humain est celui de la responsabilité juridique et éthique. En cas d'erreur grave, comme une faille de sécurité majeure ou une décision algorithmique discriminatoire, une machine ne peut pas être tenue pour responsable. Les entreprises ont besoin de professionnels humains pour valider les décisions et garantir que les outils numériques respectent les lois et les valeurs de la société.</p>
+
+        <div class="exergue">
+            <p>« Le futur du travail sera une collaboration étroite entre l'homme et la machine : la vitesse de calcul pour l'un, la sagesse décisionnelle pour l'autre. »</p>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">8</span> Interface Magazine</div>
+    <div class="folio folio-r">Monde du Travail</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.9 — GÉNÉRATEURS D'IMAGES (Jeniffan)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Culture et Loisirs</span></div>
+    <h2 class="article-title">Générateurs d'images : quand le clavier remplace le pinceau</h2>
+    <div class="author-box">
+        <div class="author-avatar">JJ</div>
+        <span class="author-name">Par Jeniffan JOHN ARULTHASAN</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">L'an dernier, une image née d'une intelligence artificielle a remporté un grand concours d'art aux États-Unis. Aucun coup de pinceau, juste quelques lignes de texte. Derrière l'exploit technique, une question dérange : ces logiciels menacent-ils les artistes, ou annoncent-ils une nouvelle façon de créer ?</p>
+
+        <p>L'affaire a fait grand bruit. Lors d'un concours numérique américain, le premier prix est allé à une toile splendide, <em>Théâtre D'opéra Spatial</em>. Son auteur, Jason Allen, n'a pas tracé un seul trait : il a tapé une description détaillée sur son clavier, et le logiciel Midjourney a fait le reste. Le résultat a fait l'effet d'une bombe chez les illustrateurs. Pour la première fois, une machine ne se contentait pas de trier des données : elle créait de la beauté et battait des artistes sur leur propre terrain.</p>
+
+        <figure>
+            <img src="img-midjourney.jpg" alt="Art généré par Midjourney">
+            <figcaption>« Théâtre D'opéra Spatial » par Jason Allen, généré avec Midjourney — premier prix d'un concours d'art numérique aux États-Unis.</figcaption>
+        </figure>
+
+        <h4>La magie démystifiée : comment la machine dessine-t-elle ?</h4>
+        <p>La technologie au cœur de ces outils s'appelle la « diffusion ». Imaginez une vieille télé qui ne capte rien : un écran gris rempli de pixels brouillés. Pendant son entraînement, l'IA a étudié des images nettes que les ingénieurs avaient volontairement noyées sous ce brouillard numérique. Quand on lui demande « un astronaute qui boit un café sur Mars », le logiciel part d'un écran totalement flou. Étape par étape, il nettoie l'image jusqu'à faire apparaître des formes fidèles à la demande.</p>
+
+        <h4>Le malaise éthique : l'art au prix du piratage ?</h4>
+        <p>Pour imiter le pinceau d'un grand peintre, l'IA doit d'abord être nourrie. Ses concepteurs ont donc aspiré une part immense des images disponibles sur le web. Des milliers de dessinateurs et de photographes ont découvert que leurs portfolios avaient servi, gratuitement, à entraîner une machine. Reste un vide juridique que les tribunaux devront vite combler.</p>
+
+        <h4>L'art de parler à la machine : un métier à part entière</h4>
+        <p>Contrairement à une idée reçue, obtenir une belle image ne se résume pas à taper deux mots au hasard. D'où l'apparition du <em>prompt engineering</em> : l'art de formuler la requête parfaite. Un bon « ingénieur de requête » précise l'éclairage, le style, l'objectif ou les couleurs dominantes. Au final, la démarche tient plus de la programmation que du dessin.</p>
+
+        <div class="exergue">
+            <p>« L'IA est sans doute l'appareil photo de notre époque. Mais elle restera un outil : sans vécu, sans souffrance, sans émotion à transmettre. »</p>
+        </div>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">9</span> Interface Magazine</div>
+    <div class="folio folio-r">Culture &amp; Loisirs</div>
+</div>
+
+<!-- ═══════════════════════════
+     P.10 — PNJ INTELLIGENTS (Jeniffan)
+     ═══════════════════════════ -->
+<div class="page">
+    <div class="rubrique-wrap"><span class="rubrique-tag">Culture et Loisirs</span></div>
+    <h2 class="article-title">PNJ intelligents : quand le jeu vidéo prend vie</h2>
+    <div class="author-box">
+        <div class="author-avatar">JJ</div>
+        <span class="author-name">Par Jeniffan JOHN ARULTHASAN</span>
+    </div>
+
+    <div class="cols">
+        <p class="dropcap">Qui n'a jamais vécu ça ? Vous jouez à Skyrim depuis des dizaines d'heures, l'immersion est totale, et soudain un garde vous sort pour la vingtième fois qu'il a « pris une flèche dans le genou ». La magie s'envole d'un coup. On se souvient qu'on est face à un programme qui tourne en boucle, rien de plus. C'est le grand défaut du jeu vidéo depuis ses débuts : les personnages non-joueurs (PNJ) sont enfermés dans leurs scripts. Avec l'essor de l'intelligence artificielle générative, cette limite est en train de tomber.</p>
+
+        <h4>De la programmation classique aux cerveaux virtuels</h4>
+        <p>Pour comprendre cette évolution, il faut regarder comment l'IA fonctionnait jusqu'ici. Les développeurs s'appuyaient sur des arbres de décision et des machines à états finis : si le joueur fait telle action, le PNJ réagit de telle façon. Le personnage reste prisonnier de ses rails et ne peut que réciter ce que les scénaristes ont écrit. Brancher un grand modèle de langage (LLM), comme GPT, directement dans le cerveau d'un PNJ bouleverse toute la logique de création. En jeu, le PNJ analyse ce que le joueur lui dit et génère une réponse unique. Il peut se souvenir qu'on l'a trahi deux heures plus tôt, s'énerver si on le provoque, ou improviser face à une situation imprévue.</p>
+
+        <figure>
+            <img src="img-pnj.jpg" alt="NVIDIA ACE — PNJ intelligents">
+            <figcaption>NVIDIA ACE — la technologie qui donne vie aux personnages de jeux (PUBG, Mir5, Naraka) grâce à l'IA générative.</figcaption>
+        </figure>
+
+        <h4>Des expériences déjà bluffantes dans l'industrie</h4>
+        <p>NVIDIA pousse aussi la technologie avec son <em>Avatar Cloud Engine</em> (ACE). L'outil gère non seulement le texte généré, mais aussi la synchronisation des lèvres et les expressions du visage en temps réel, sans qu'un animateur ait à tout faire à la main. Du côté indépendant, le jeu <em>Inworld Origin</em> a marqué les esprits : toute l'aventure repose sur des PNJ capables de mentir, de changer d'avis ou de tenir rancune.</p>
+
+        <h4>Les défis techniques à surmonter</h4>
+        <p>Comment empêcher un PNJ qui génère lui-même ses répliques de dire quelque chose de hors sujet, ou de révéler la fin du jeu sans le faire exprès ? L'autre obstacle est matériel. Faire tourner un modèle de langage en local demande une puissance de calcul énorme. Nos PC ou nos consoles sont déjà sollicités au maximum pour afficher de la haute résolution ou gérer le Ray Tracing. La solution la plus réaliste aujourd'hui passe par le Cloud computing : le calcul est déporté sur des serveurs distants.</p>
+
+        <div class="exergue">
+            <p>« Demain, le joueur ne sera plus le spectateur d'un film interactif, mais l'acteur principal d'un monde qui réagit vraiment à ce qu'il dit. »</p>
+        </div>
+
+        <p>Le jeu vidéo est en train de passer du produit fini au monde vivant. Ce n'est plus seulement une question de graphismes ou de performance brute, mais d'intelligence narrative. L'IA ne joue plus seulement le rôle d'ennemi scriptable — elle devient le co-auteur de chaque partie.</p>
+    </div>
+
+    <div class="folio folio-l"><span class="folio-n">10</span> Interface Magazine</div>
+    <div class="folio folio-r">Culture &amp; Loisirs</div>
+</div>
+
+</body>
+</html>
